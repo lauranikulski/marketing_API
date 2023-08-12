@@ -20,7 +20,12 @@
 # once your virtual environment is installed, you can also select it more easily from the interpreter menu 
 
 from flask import Flask, request, jsonify, render_template, url_for, redirect
-from pydantic import BaseModel
+from pydantic import BaseModel, SecretBytes, SecretStr, ValidationError # to define schema
+
+class EnterEmail(BaseModel):
+    email: str
+    password: SecretStr  
+    password_bytes: SecretBytes  
 
 # Step 5: Create Flask application instance
 app = Flask(__name__)
@@ -37,17 +42,23 @@ def hello_root():
 
 @app.route('/enter_email.html', methods=['GET', 'POST'])
 def enter_email():
-    if request.method == 'POST':
+    if request.method == 'POST': # for each post request there should be a valid email and password
         data = request.form
         email = data.get('email')
         password = data.get('password')
         
         # Do something with the email and password
         
-        response = {'message': 'Email and password received'}
+        response = {'message': 'Email and password received'} # extract data
+        print(email, password)
         return jsonify(response), 200
-
     return render_template('enter_email.html') # renders your HTML webpage including CSS styling
+
+class EnterEmail(BaseModel):
+    email: str
+    password: SecretStr  
+    password_bytes: SecretBytes  
+
     
 
 # Step 7: Run development server locally
