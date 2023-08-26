@@ -1,15 +1,12 @@
-# libraries 
+    # libraries 
 from flask import Flask, request, jsonify, render_template, url_for, redirect
 from pydantic import BaseModel, SecretBytes, SecretStr, ValidationError # to define schema
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 
 # classes 
-class EnterEmail(BaseModel):
-    email: str
-    password: SecretStr  
-    password_bytes: SecretBytes  
-    
+
+
 # Create Flask application instance
 app = Flask(__name__)
 
@@ -27,11 +24,9 @@ def enter_email():
         password = data.get('password')
         # Do something with the email and password
         response = {'message': 'Email and password received'} # extract data
-        print(email, password)
         return jsonify(response), 200
-    return render_template('enter_email.html') # renders your HTML webpage including CSS styling
+    return render_template('enter_email.html')
 
 # Run development server locally
 if __name__ == '__main__':
     app.run(debug=True)
-    
