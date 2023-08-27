@@ -7,13 +7,17 @@
         <main>
             <p>Sign up here</p>
             <form action="/enter_email" enctype="multipart/form-data" method="POST">
-                <label for="email">Your email address:</label>
-                <input type="email" id="email" name="email" required><br><br> 
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required><br><br>
-                <input type="submit" value="Submit">
+                {{template_form.hidden_tag()}}
+                <p>Your email address </p>
+                {{template_form.email.email}}
+                {{template_form.email}}
+                <br>
+                <p>Your password </p>
+                {{template_form.password.password}}
+                {{template_form.password}}
+                <br>
+                {{template_form.submit}}
+                <br>
             </form>
         </main>
-
 {% endblock %}
-        
